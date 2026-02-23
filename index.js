@@ -18,12 +18,15 @@ app.use(router)
 
 const server = http.createServer(app)
 
-const io = new Server(server, {
-    cors: {
-        origin: "*",
-        methods: ["GET", "POST"]
-    }
-})
+const io = require("socket.io")(server, {
+  cors: {
+    origin: [
+      "http://localhost:5173",
+      "https://chat-app-frontend-nspz.vercel.app"
+    ],
+    methods: ["GET", "POST"],
+  },
+});
 
 // username -> socketId
 let onlineUsers = {}
